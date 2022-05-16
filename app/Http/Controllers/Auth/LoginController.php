@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,32 @@ class LoginController extends BaseController
         );
     }
 
-    public function attempt(Request $request)
+    public function attempt(LoginRequest $request)
     {
-        $request->all();
+        $inputs = $request->validated();
+        $inputs['status'] = 1;
+
+        if (Auth::attempt($inputs)) {
+            $request->session()->regenerate();
+
+            return to_route('admin.dashboard');
+        }
+
+        return back()
+            ->withErrors([
+                'email' => __('The provided credentials do not match our records.'),
+            ])
+            ->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return to_route('admin.login');
     }
 }

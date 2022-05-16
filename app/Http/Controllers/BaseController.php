@@ -8,10 +8,13 @@ class BaseController extends Controller
 {
     protected $title;
 
-    protected function getData(): array
+    protected function getData(array $data = []): array
     {
-        return [
-            'title' => Str::title(__($this->title)),
-        ];
+        return array_merge(
+            [
+                'title' => Str::title(__($this->title)),
+            ],
+            $data
+        );
     }
 }

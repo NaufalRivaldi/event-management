@@ -16,6 +16,8 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+
+    @stack('css')
 </head>
 
 <body>
@@ -39,6 +41,7 @@
                 @include('layouts.includes.heading')
 
                 <div class="container-fluid">
+                    @include('layouts.includes.alert')
                     @yield('content')
                 </div>
             </div>

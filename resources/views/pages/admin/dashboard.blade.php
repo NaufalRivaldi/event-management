@@ -7,7 +7,7 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis doloribus alias placeat quidem dolores, repellendus repudiandae ut aspernatur delectus eligendi eius esse assumenda harum quae expedita laboriosam cupiditate deleniti quaerat.
+                Selamat datang di sistem event management.
             </div>
         </div>
     </div>

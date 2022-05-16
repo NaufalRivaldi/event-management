@@ -7,6 +7,7 @@
     <div class="logo text-center"><img src="{{ asset('assets/images/logo-dark.png') }}" alt="Klorofil Logo"></div>
     <p class="lead">Login to your account</p>
 </div>
+@include('layouts.includes.alert')
 <form class="form-auth-small" action="{{ route('admin.login.attempt') }}" method="POST">
     @csrf
     <div class="form-group">
@@ -15,10 +16,11 @@
             <input
                 type="email"
                 name="email"
-                class="form-control"
+                class="form-control @error('email') is-invalid @enderror"
                 id="signin-email"
                 placeholder="Email"
                 required
+                value="{{ old('email') }}"
             >
             <span class="input-group-append">
                 <span class="input-group-text">
@@ -26,6 +28,11 @@
                 </span>
             </span>
         </div>
+        <!-- Error -->
+        @error('email')
+        <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
+        <!-- Error -->
     </div>
 
     <div class="form-group">
@@ -34,10 +41,11 @@
             <input
                 :type="formLogic.password.type"
                 name="password"
-                class="form-control"
+                class="form-control @error('password') is-invalid @enderror"
                 id="signin-password"
                 placeholder="Password"
                 required
+                value="{{ old('password') }}"
             >
             <span class="input-group-append">
                 <button
@@ -59,6 +67,11 @@
                 </button>
             </span>
         </div>
+        <!-- Error -->
+        @error('password')
+        <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
+        <!-- Error -->
     </div>
 
     <div class="form-group">

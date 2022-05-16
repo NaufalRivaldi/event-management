@@ -18,13 +18,13 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@' . config('app.domain'),
-            'role_id' => 1,
+            'role_id' => User::USER_ADMIN,
         ]);
 
         User::factory()->create([
             'name' => 'Anggota',
             'email' => 'anggota@' . config('app.domain'),
-            'role_id' => 2,
+            'role_id' => User::USER_ANGGOTA,
         ]);
     }
 }
