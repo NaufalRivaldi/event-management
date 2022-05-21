@@ -27,6 +27,9 @@ class EventRequest extends FormRequest
             'title' => 'required',
             'description' => 'nullable',
             'location' => 'nullable',
+            'is_register' => 'nullable',
+            'start_time' => 'nullable',
+            'end_time' => 'nullable',
             'start_date' => 'required',
             'end_date' => 'required',
         ];

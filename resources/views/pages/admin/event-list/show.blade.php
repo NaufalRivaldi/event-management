@@ -54,11 +54,18 @@
                 <p>
                     {{ date('d F Y, H:i:s', strtotime($record->start_date)) }} {{ $record->end_date ? 's/d '.date('d F Y, H:i:s', strtotime($record->end_date)) : null }}
                 </p>
+                @if ($record->is_register)
+                <b>Waktu Absen</b>
+                <p>
+                    {{ $record->start_time }} s/d {{ $record->end_time }}
+                </p>
+                @endif
             </div>
         </div>
     </div>
 </div>
 
+@if ($record->is_register)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -90,6 +97,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 
 @push('scripts')

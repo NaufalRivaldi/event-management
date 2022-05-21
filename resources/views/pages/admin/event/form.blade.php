@@ -71,6 +71,53 @@
                     </div>
 
                     <div class="form-group">
+                        <div class="form-check">
+                            <input v-model="form.is_register" name="is_register" class="form-check-input" type="checkbox" value="1" id="defaultCheck1" @if($record->is_register) checked @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Dengan Absen?
+                            </label>
+                        </div>
+
+                        <!-- Error -->
+                        @error('is_register')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
+
+                    <div v-if="form.is_register" class="form-group">
+                        <label for="">Waktu Mulai Absen</label>
+                        <input
+                            type="time"
+                            name="start_time"
+                            class="form-control @error('start_time') is-invalid @enderror"
+                            value="{{ old('start_time') ?? $record->start_time }}"
+                        >
+
+                        <!-- Error -->
+                        @error('start_time')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
+
+                    <div v-if="form.is_register" class="form-group">
+                        <label for="">Waktu Berakhir Absen</label>
+                        <input
+                            type="time"
+                            name="end_time"
+                            class="form-control @error('end_time') is-invalid @enderror"
+                            value="{{ old('end_time') ?? $record->end_time }}"
+                        >
+
+                        <!-- Error -->
+                        @error('end_time')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
+
+                    <div class="form-group">
                         <label for="">Waktu Mulai</label>
                         <input
                             type="datetime-local"
@@ -116,3 +163,21 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                form: {
+                    is_register: ("{{ $record->is_register }}" === '1'),
+                },
+            };
+        },
+
+        methods: {
+            //
+        },
+    }).mount('#app')
+</script>
+@endpush

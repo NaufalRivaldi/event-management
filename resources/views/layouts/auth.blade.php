@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-    <title>{{ env('APP_NAME', 'Laravel') }} | @yield('title')</title>
+    <title>{{ str_replace('_', ' ', env('APP_NAME', 'Laravel')) }} | @yield('title')</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
@@ -32,9 +32,9 @@
                 <div class="overlay"></div>
                 <div class="content text">
                     <h1 class="heading font-weight-bold">
-                        {{ env('APP_NAME', 'Laravel') }}
+                        {{ str_replace('_', ' ', env('APP_NAME', 'Laravel')) }}
                     </h1>
-                    <p>by The Develovers</p>
+                    <p>by Stt Segara Madu</p>
                 </div>
             </div>
         </div>

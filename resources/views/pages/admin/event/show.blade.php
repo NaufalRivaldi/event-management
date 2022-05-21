@@ -19,6 +19,9 @@
                 <a href="{{ route('admin.events.index') }}" class="btn btn-primary">
                     <i class="fas fa-angle-left"></i> Kembali
                 </a>
+                <a href="{{ route('admin.events.register.create', $record->id) }}" class="btn btn-success ml-2">
+                    <i class="fas fa-plus"></i> Daftar Hadir Manual
+                </a>
             </div>
             <div class="card-body">
                 <h2>
@@ -36,6 +39,13 @@
                 <p>
                     {{ date('d F Y, H:i:s', strtotime($record->start_date)) }} {{ $record->end_date ? 's/d '.date('d F Y, H:i:s', strtotime($record->end_date)) : null }}
                 </p>
+
+                @if ($record->is_register)
+                <b>Waktu Absen</b>
+                <p>
+                    {{ $record->start_time }} s/d {{ $record->end_time }}
+                </p>
+                @endif
             </div>
         </div>
     </div>
@@ -62,6 +72,7 @@
                                     <th>Umur</th>
                                     <th>Hobi</th>
                                     <th>Alamat</th>
+                                    <th>Action</th>
                                 @endif
                             </tr>
                         </thead>
@@ -71,12 +82,23 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $register->user->name }}</td>
                                     <td>{{ $register->user->email }}</td>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->father_name : null }}</th>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->mother_name : null }}</th>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->phone : null }}</th>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->age : null }}</th>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->hobby : null }}</th>
-                                    <th>{{ $register->user->userDetail ? $register->user->userDetail->address : null }}</th>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->father_name : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->mother_name : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->phone : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->age : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->hobby : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->address : null }}</td>
+                                    <td>
+                                        <button
+                                            class="btn btn-danger btn-sm ml-1"
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="Hapus Data"
+                                            @click="deleteData({{ $register->id }})"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,6 +108,11 @@
         </div>
     </div>
 </div>
+
+<form :action="deleteUrl" method="POST" ref="formDelete">
+    @csrf
+    @method('DELETE')
+</form>
 @endsection
 
 @push('scripts')
@@ -114,5 +141,30 @@
             ]
         } );
     } );
+</script>
+
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                deleteUrl: null,
+            };
+        },
+
+        methods: {
+            deleteData(userId) {
+                let url = "{{ route('admin.events.register.delete', ':id') }}";
+                if (confirm('Hapus data?')) {
+                    url = url.replace(':id', userId);
+
+                    this.deleteUrl = url;
+
+                    setTimeout(() => {
+                        this.$refs.formDelete.submit();
+                    }, 200);
+                }
+            },
+        },
+    }).mount('#app')
 </script>
 @endpush

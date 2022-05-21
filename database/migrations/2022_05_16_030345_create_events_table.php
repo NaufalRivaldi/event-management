@@ -21,6 +21,9 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->boolean('status')->default(1);
+            $table->boolean('is_register')->default(1);
+            $table->time('start_time', $precision = 0)->nullable();
+            $table->time('end_time', $precision = 0)->nullable();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->nullable()

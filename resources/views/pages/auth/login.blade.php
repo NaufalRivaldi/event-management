@@ -5,7 +5,9 @@
 @section('content')
 <div class="header">
     <div class="logo text-center"><img src="{{ asset('assets/images/logo-dark.png') }}" alt="Klorofil Logo"></div>
-    <p class="lead">Login to your account</p>
+    <p class="lead">
+        {{ __('Masuk ke akun anda') }}
+    </p>
 </div>
 @include('layouts.includes.alert')
 <form class="form-auth-small" action="{{ route('admin.login.attempt') }}" method="POST">
@@ -82,12 +84,14 @@
     </div>
 
     <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+    {{--
     <div class="bottom">
         <span class="helper-text d-block">
             Don't have an account? <a href="{{ route('admin.register') }}">Register</a>
         </span>
         <span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
     </div>
+    --}}
 </form>
 @endsection
 

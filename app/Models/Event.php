@@ -13,6 +13,9 @@ class Event extends Model
         'title',
         'description',
         'location',
+        'is_register',
+        'start_time',
+        'end_time',
         'start_date',
         'end_date',
         'user_id',
@@ -26,6 +29,16 @@ class Event extends Model
         $this->start_date = $inputs['start_date'];
         $this->end_date = $inputs['end_date'];
 
+        if (isset($inputs['is_register'])) {
+            $this->is_register = $inputs['is_register'];
+            $this->start_time = $inputs['start_time'];
+            $this->end_time = $inputs['end_time'];
+        } else {
+            $this->is_register = false;
+            $this->start_time = null;
+            $this->end_time = null;
+        }
+
         if (isset($inputs['user_id'])) {
             $this->user_id = $inputs['user_id'];
         }
@@ -38,7 +51,11 @@ class Event extends Model
         $dateNow = date('Y-m-d');
         $dateEvent = date('Y-m-d', strtotime($this->start_date));
 
-        return $dateNow == $dateEvent;
+        $timeNow = date('H:i:s');
+
+        return ($dateNow == $dateEvent)
+            && $this->is_register
+            && ($timeNow >= $this->start_time && $timeNow <= $this->end_time);
     }
 
     public function scopeActive($query)

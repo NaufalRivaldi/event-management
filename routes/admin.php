@@ -60,6 +60,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('anggota', AnggotaController::class);
     Route::resource('events', EventController::class);
+    Route::get('events/{event}/register', [EventController::class, 'createRegister'])
+        ->name('events.register.create');
+    Route::post('events/{event}/store', [EventController::class, 'storeRegister'])
+        ->name('events.register.store');
+    Route::delete('/event-registers/{register}', [EventController::class, 'destroyEventRegister'])
+        ->name('events.register.delete');
 
     Route::get('/event-list', [EventListController::class, 'index'])->name('event-list.index');
     Route::get('/event-list/{event}', [EventListController::class, 'show'])->name('event-list.show');

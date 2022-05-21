@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Event;
-use App\Services\EventService;
+use App\Models\{
+    Event,
+    EventRegister
+};
+use App\Services\{
+    EventService,
+    UserService
+};
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\EventRequest;
 use Illuminate\Http\Request;
@@ -14,10 +20,14 @@ class EventController extends BaseController
 
     private $baseView = 'pages.admin.event.';
     private $eventService;
+    private $userService;
 
-    public function __construct(EventService $eventService)
-    {
+    public function __construct(
+        EventService $eventService,
+        UserService $userService
+    ) {
         $this->eventService = $eventService;
+        $this->userService = $userService;
     }
 
     /**
@@ -50,6 +60,24 @@ class EventController extends BaseController
         );
     }
 
+    public function createRegister(Event $event)
+    {
+        $userIds = [];
+
+        foreach ($event->eventRegisters()->get() as $register) {
+            $userIds[] = $register->user_id;
+        }
+
+        return view(
+            $this->baseView . 'form-register',
+            $this->getData([
+                'record' => $event,
+                'userIds' => $userIds,
+                'anggotas' => $this->userService->getRecordMembers()
+            ])
+        );
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -72,6 +100,25 @@ class EventController extends BaseController
         } catch (\Throwable $th) {
             return redirect()
                 ->route('admin.events.create')
+                ->with('danger', $th->getMessage());
+        };
+    }
+
+    public function storeRegister(Request $request, Event $event)
+    {
+        try {
+            $eventRegister = new EventRegister();
+
+            $eventRegister->user_id = $request->user_id;
+            $eventRegister->event_id = $event->id;
+            $eventRegister->save();
+
+            return redirect()
+                ->route('admin.events.show', $event->id)
+                ->with('success', 'User berhasil di simpan');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('admin.events.register.create', $event->id)
                 ->with('danger', $th->getMessage());
         };
     }
@@ -146,5 +193,16 @@ class EventController extends BaseController
         return redirect()
                 ->route('admin.events.index')
                 ->with('success', 'User berhasil di delete');
+    }
+
+    public function destroyEventRegister(EventRegister $register)
+    {
+        $eventId = $register->event_id;
+
+        $register->delete();
+
+        return redirect()
+                ->route('admin.events.show', $eventId)
+                ->with('success', 'User berhasil di hapus pada event.');
     }
 }
