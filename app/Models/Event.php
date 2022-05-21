@@ -52,6 +52,7 @@ class Event extends Model
         $dateEvent = date('Y-m-d', strtotime($this->start_date));
 
         $timeNow = date('H:i:s');
+        dd($timeNow);
 
         return ($dateNow == $dateEvent)
             && $this->is_register
