@@ -74,6 +74,17 @@ class AnggotaController extends BaseController
             $inputs['user_id'] = $user->id;
             $userDetail->saveFromInputs($inputs);
 
+            if (isset($inputs['photo'])) {
+                $photoUrl = cloudinary()->upload(
+                    $request->file('photo')->getRealPath(),
+                    [
+                        'folder' => 'photo'
+                    ]
+                )->getSecurePath();
+
+                $userDetail->savePhotoUrl($photoUrl);
+            }
+
             return redirect()
                 ->route('admin.anggota.index')
                 ->with('success', 'User berhasil di simpan');
@@ -129,12 +140,26 @@ class AnggotaController extends BaseController
                 $anggotum->savePassword($inputs);
             }
 
+            $inputs['user_id'] = $anggotum->id;
+            $anggotum->userDetail->saveFromInputs($inputs);
+
+            if (isset($inputs['photo'])) {
+                $photoUrl = cloudinary()->upload(
+                    $request->file('photo')->getRealPath(),
+                    [
+                        'folder' => 'photo'
+                    ]
+                )->getSecurePath();
+
+                $anggotum->userDetail->savePhotoUrl($photoUrl);
+            }
+
             return redirect()
                 ->route('admin.anggota.index')
                 ->with('success', 'User berhasil di simpan');
         } catch (\Throwable $th) {
             return redirect()
-                ->route('admin.anggota.create')
+                ->route('admin.anggota.edit', $anggotum->id)
                 ->with('danger', $th->getMessage());
         };
     }

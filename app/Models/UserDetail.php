@@ -10,6 +10,7 @@ class UserDetail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'photo_url',
         'father_name',
         'mother_name',
         'address',
@@ -28,6 +29,12 @@ class UserDetail extends Model
         $this->age = $inputs['age'];
         $this->hobby = $inputs['hobby'];
         $this->user_id = $inputs['user_id'];
+        $this->save();
+    }
+
+    public function savePhotoUrl($url): void
+    {
+        $this->photo_url = $url;
         $this->save();
     }
 }

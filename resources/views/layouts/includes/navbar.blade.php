@@ -7,7 +7,17 @@
         <div id="navbar-menu">
             <ul class="nav navbar-nav align-items-center">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="https://i.imgur.com/M701HZb.jpg" class="user-picture"" alt=" Avatar"> <span>Samuel</span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        @if (auth()->user()->userDetail)
+                            @if (auth()->user()->userDetail->photo_url)
+                                <img src="{{ auth()->user()->userDetail->photo_url }}" class="user-picture"" alt=" Avatar"> <span>{{ auth()->user()->name }}</span>
+                            @else
+                                <img src="https://i.imgur.com/M701HZb.jpg" class="user-picture"" alt=" Avatar"> <span>{{ auth()->user()->name }}</span>
+                            @endif
+                        @else
+                            <img src="https://i.imgur.com/M701HZb.jpg" class="user-picture"" alt=" Avatar"> <span>{{ auth()->user()->name }}</span>
+                        @endif
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right logged-user-menu">
                         <li>
                             <a href="{{ route('admin.profile.index') }}">

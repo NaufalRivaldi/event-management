@@ -42,8 +42,30 @@ class ProfileController extends BaseController
                 if (!$user->userDetail) {
                     $userDetail = new UserDetail();
                     $userDetail->saveFromInputs($inputs);
+
+                    if (isset($inputs['photo'])) {
+                        $photoUrl = cloudinary()->upload(
+                            $request->file('photo')->getRealPath(),
+                            [
+                                'folder' => 'photo'
+                            ]
+                        )->getSecurePath();
+
+                        $userDetail->savePhotoUrl($photoUrl);
+                    }
                 } else {
                     $user->userDetail->saveFromInputs($inputs);
+
+                    if (isset($inputs['photo'])) {
+                        $photoUrl = cloudinary()->upload(
+                            $request->file('photo')->getRealPath(),
+                            [
+                                'folder' => 'photo'
+                            ]
+                        )->getSecurePath();
+
+                        $user->userDetail->savePhotoUrl($photoUrl);
+                    }
                 }
             }
 

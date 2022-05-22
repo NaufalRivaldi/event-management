@@ -15,12 +15,36 @@
                 <form
                     action="{{ $record->id ? route('admin.anggota.update', $record->id) : route('admin.anggota.store') }}"
                     method="POST"
+                    enctype="multipart/form-data"
                 >
                     @csrf
                     @if ($record->id)
                         @method('PUT')
                         <input type="hidden" name="id" value="{{ $record->id }}">
                     @endif
+
+                    @if ($record->userDetail)
+                        @if ($record->userDetail->photo_url)
+                            <img src="{{ $record->userDetail->photo_url }}" alt="photo profile" class="img-thumbnail" width="200px">
+                        @endif
+                    @endif
+
+                    <div class="form-group">
+                        <label for="">Foto</label>
+                        <input
+                            type="file"
+                            name="photo"
+                            class="form-control @error('photo') is-invalid @enderror"
+                            value="{{ old('photo') }}"
+                        >
+                        <small class="form-text text-info">{{ __('Upload foto kembali jika ingin merubah foto') }}</small>
+
+                        <!-- Error -->
+                        @error('photo')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
 
                     <div class="form-group">
                         <label for="">Nama</label>

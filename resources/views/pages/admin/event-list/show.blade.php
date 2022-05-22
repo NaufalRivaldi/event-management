@@ -78,6 +78,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
+                                <th>Foto</th>
                                 <th>Nama Anggota</th>
                                 <th>Email</th>
                             </tr>
@@ -86,6 +87,17 @@
                             @foreach ($record->eventRegisters()->get() as $register)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
+                                    <td>
+                                        @if ($register->user->userDetail)
+                                            @if ($register->user->userDetail->photo_url)
+                                                <img src="{{ $register->user->userDetail->photo_url }}" class="img-thumbnail" alt="photo" width="100">
+                                            @else
+                                                -
+                                            @endif
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                     <td>{{ $register->user->name }}</td>
                                     <td>{{ $register->user->email }}</td>
                                 </tr>

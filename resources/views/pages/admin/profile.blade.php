@@ -13,9 +13,34 @@
                 <form
                     action="{{ route('admin.profile.update', auth()->user()->id) }}"
                     method="POST"
+                    enctype="multipart/form-data"
                 >
                     @csrf
                     @method('PUT')
+
+                    @if (auth()->user()->userDetail)
+                        @if (auth()->user()->userDetail->photo_url)
+                            <img src="{{ auth()->user()->userDetail->photo_url }}" alt="photo profile" class="img-thumbnail" width="200px">
+                        @endif
+                    @endif
+
+                    <div class="form-group">
+                        <label for="">Foto</label>
+                        <input
+                            type="file"
+                            name="photo"
+                            class="form-control @error('photo') is-invalid @enderror"
+                            value="{{ old('photo') }}"
+                        >
+                        <small class="form-text text-info">{{ __('Upload foto kembali jika ingin merubah foto') }}</small>
+
+                        <!-- Error -->
+                        @error('photo')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
+
                     <div class="form-group">
                         <label for="">
                             Nama <span class="text-danger">*</span>
