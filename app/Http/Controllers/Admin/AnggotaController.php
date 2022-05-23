@@ -72,17 +72,34 @@ class AnggotaController extends BaseController
 
             $userDetail = new UserDetail();
             $inputs['user_id'] = $user->id;
-            $userDetail->saveFromInputs($inputs);
 
-            if (isset($inputs['photo'])) {
-                $photoUrl = cloudinary()->upload(
-                    $request->file('photo')->getRealPath(),
-                    [
-                        'folder' => 'photo'
-                    ]
-                )->getSecurePath();
+            if (!$user->userDetail) {
+                $userDetail = new UserDetail();
+                $userDetail->saveFromInputs($inputs);
 
-                $userDetail->savePhotoUrl($photoUrl);
+                if (isset($inputs['photo'])) {
+                    $photoUrl = cloudinary()->upload(
+                        $request->file('photo')->getRealPath(),
+                        [
+                            'folder' => 'photo'
+                        ]
+                    )->getSecurePath();
+
+                    $userDetail->savePhotoUrl($photoUrl);
+                }
+            } else {
+                $user->userDetail->saveFromInputs($inputs);
+
+                if (isset($inputs['photo'])) {
+                    $photoUrl = cloudinary()->upload(
+                        $request->file('photo')->getRealPath(),
+                        [
+                            'folder' => 'photo'
+                        ]
+                    )->getSecurePath();
+
+                    $user->userDetail->savePhotoUrl($photoUrl);
+                }
             }
 
             return redirect()
@@ -141,17 +158,34 @@ class AnggotaController extends BaseController
             }
 
             $inputs['user_id'] = $anggotum->id;
-            $anggotum->userDetail->saveFromInputs($inputs);
 
-            if (isset($inputs['photo'])) {
-                $photoUrl = cloudinary()->upload(
-                    $request->file('photo')->getRealPath(),
-                    [
-                        'folder' => 'photo'
-                    ]
-                )->getSecurePath();
+            if (!$anggotum->userDetail) {
+                $userDetail = new UserDetail();
+                $userDetail->saveFromInputs($inputs);
 
-                $anggotum->userDetail->savePhotoUrl($photoUrl);
+                if (isset($inputs['photo'])) {
+                    $photoUrl = cloudinary()->upload(
+                        $request->file('photo')->getRealPath(),
+                        [
+                            'folder' => 'photo'
+                        ]
+                    )->getSecurePath();
+
+                    $userDetail->savePhotoUrl($photoUrl);
+                }
+            } else {
+                $anggotum->userDetail->saveFromInputs($inputs);
+
+                if (isset($inputs['photo'])) {
+                    $photoUrl = cloudinary()->upload(
+                        $request->file('photo')->getRealPath(),
+                        [
+                            'folder' => 'photo'
+                        ]
+                    )->getSecurePath();
+
+                    $anggotum->userDetail->savePhotoUrl($photoUrl);
+                }
             }
 
             return redirect()
