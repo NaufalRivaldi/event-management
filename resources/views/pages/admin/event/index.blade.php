@@ -108,7 +108,38 @@
         $('#datatable-export').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'excel', 'pdf', 'print'
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
             ]
         } );
     } );

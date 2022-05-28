@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="header">
-    <div class="logo text-center"><img src="{{ asset('assets/images/logo-dark.png') }}" alt="Klorofil Logo"></div>
+    <div class="logo text-center">
+        <img src="{{ asset('assets/images/logo.jpeg') }}" alt="Klorofil Logo" style="width: 150px">
+    </div>
     <p class="lead">
         {{ __('Masuk ke akun anda') }}
     </p>

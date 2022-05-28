@@ -26,5 +26,11 @@ class UserSeeder extends Seeder
             'email' => 'anggota@' . config('app.domain'),
             'role_id' => User::USER_ANGGOTA,
         ]);
+
+        for ($i = 0; $i < 50; $i++) {
+            User::factory()->create([
+                'role_id' => User::USER_ANGGOTA,
+            ]);
+        }
     }
 }

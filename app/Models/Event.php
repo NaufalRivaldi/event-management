@@ -73,4 +73,9 @@ class Event extends Model
     {
         return $this->hasMany(EventRegister::class, 'event_id');
     }
+
+    public function eventImages()
+    {
+        return $this->hasMany(EventImage::class, 'event_id');
+    }
 }

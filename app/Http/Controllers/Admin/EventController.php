@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\{
     Event,
-    EventRegister
+    EventRegister,
+    EventImage,
 };
 use App\Services\{
     EventService,
@@ -204,5 +205,34 @@ class EventController extends BaseController
         return redirect()
                 ->route('admin.events.show', $eventId)
                 ->with('success', 'User berhasil di hapus pada event.');
+    }
+
+    public function storeImage(Request $request, Event $event)
+    {
+        $inputs = [];
+
+        if ($request->has('photo')) {
+            $imageUrl = cloudinary()->upload(
+                $request->file('photo')->getRealPath(),
+                [
+                    'folder' => 'event'
+                ]
+            )->getSecurePath();
+
+            $inputs['image'] = $imageUrl;
+            $inputs['event_id'] = $event->id;
+
+            $eventImage = new EventImage();
+            $eventImage->saveFromInputs($inputs);
+        }
+
+        return redirect()->back();
+    }
+
+    public function deleteImage(EventImage $eventImage)
+    {
+        $eventImage->delete();
+
+        return redirect()->back();
     }
 }

@@ -73,6 +73,7 @@
                                     <th>Umur</th>
                                     <th>Hobi</th>
                                     <th>Alamat</th>
+                                    <th>Kesinoman</th>
                                     <th>Action</th>
                                 @endif
                             </tr>
@@ -100,6 +101,7 @@
                                     <td>{{ $register->user->userDetail ? $register->user->userDetail->age : null }}</td>
                                     <td>{{ $register->user->userDetail ? $register->user->userDetail->hobby : null }}</td>
                                     <td>{{ $register->user->userDetail ? $register->user->userDetail->address : null }}</td>
+                                    <td>{{ $register->user->userDetail ? $register->user->userDetail->kesinoman : null }}</td>
                                     <td>
                                         <button
                                             class="btn btn-danger btn-sm ml-1"
@@ -116,6 +118,56 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3>Dokumentasi</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form
+                            action="{{ route('admin.events.image.store', $record->id) }}"
+                            method="POST"
+                            enctype="multipart/form-data"
+                        >
+                            @csrf
+                            <div class="form-group">
+                                <label for="">Photo</label>
+                                <input type="file" name="photo" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary">Post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <hr>
+
+                @if (count($record->eventImages) > 0)
+                    <div class="row">
+                        @foreach($record->eventImages as $eventImage)
+                        <div class="col-md-4">
+                            <div class="card" style="min-height: 300px;">
+                                <img src="{{ $eventImage->image }}" class="card-img-top" alt="gallery">
+                                <div class="card-body text-center">
+                                    <a href="{{ route('admin.events.image.destroy', $eventImage->id) }}" onclick="return confirm('Delete gambar?')" class="btn btn-danger">Hapus Gambar</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p>Tidak ada dokumentasi</p>
+                @endif
             </div>
         </div>
     </div>
@@ -149,7 +201,38 @@
         $('#datatable-export').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'excel', 'pdf', 'print'
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
             ]
         } );
     } );

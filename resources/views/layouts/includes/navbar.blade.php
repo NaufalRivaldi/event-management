@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand fixed-top">
     <div class="navbar-brand d-none d-lg-block">
-        <a href="index.html"><img src="{{ asset('assets/images/logo-white.png') }}" alt="Klorofil Pro Logo" class="img-fluid logo"></a>
+        <a href="index.html" class="text-white">
+            Stt Segara Madu
+        </a>
     </div>
     <div class="container-fluid p-0">
         <button id="tour-fullwidth" type="button" class="btn btn-default btn-toggle-fullwidth"><i class="ti-menu"></i></button>

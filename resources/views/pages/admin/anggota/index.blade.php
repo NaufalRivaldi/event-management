@@ -21,6 +21,28 @@
                 </a>
             </div>
             <div class="card-body">
+                <form action="" method="GET" ref="formFilter">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kesinoman</label>
+                                <select
+                                    name="kesinoman"
+                                    class="form-control"
+                                    @change="filter()"
+                                >
+                                    <option value="">- Pilih -</option>
+                                    @foreach ($kesinoman as $data)
+                                        <option value="{{ $data }}" @if(request()->kesinoman == $data) selected @endif>{{ ucwords($data) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+
                 <div class="table-responsive">
                     <table id="datatable-export" class="table table-striped">
                         <thead class="thead-light">
@@ -98,7 +120,38 @@
         $('#datatable-export').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'excel', 'pdf', 'print'
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        }
+                    }
+                },
             ]
         } );
     } );
@@ -124,6 +177,10 @@
                         this.$refs.formDelete.submit();
                     }, 200);
                 }
+            },
+
+            filter() {
+                this.$refs.formFilter.submit();
             },
         },
     }).mount('#app')

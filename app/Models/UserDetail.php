@@ -28,6 +28,7 @@ class UserDetail extends Model
         $this->phone = $inputs['phone'];
         $this->age = $inputs['age'];
         $this->hobby = $inputs['hobby'];
+        $this->kesinoman = $inputs['kesinoman'];
         $this->user_id = $inputs['user_id'];
         $this->save();
     }

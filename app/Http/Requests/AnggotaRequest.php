@@ -33,12 +33,13 @@ class AnggotaRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($this->id)
             ],
             'password' => !$this->id ? 'required' : 'nullable',
-            'father_name' => ['nullable', 'max: 255'],
-            'mother_name' => ['nullable', 'max: 255'],
-            'phone' => ['nullable', 'max: 255'],
-            'age' => ['nullable', 'max: 255'],
-            'hobby' => ['nullable', 'max: 255'],
-            'address' => ['nullable'],
+            'father_name' => ['required', 'max: 255'],
+            'mother_name' => ['required', 'max: 255'],
+            'phone' => ['required', 'max: 255'],
+            'age' => ['required', 'max: 255'],
+            'hobby' => ['required', 'max: 255'],
+            'address' => ['required'],
+            'kesinoman' => ['required'],
         ];
     }
 }

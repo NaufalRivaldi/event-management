@@ -28,12 +28,15 @@ class AnggotaController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view(
             $this->baseView . 'index',
             $this->getData([
-                'records' => $this->userService->getRecordMembers(),
+                'records' => $this->userService->getRecordMembers(
+                    $request->only('kesinoman')
+                ),
+                'kesinoman' => config('constants.kesinoman'),
             ])
         );
     }
@@ -49,6 +52,7 @@ class AnggotaController extends BaseController
             $this->baseView . 'form',
             $this->getData([
                 'record' => new User(),
+                'kesinoman' => config('constants.kesinoman'),
             ])
         );
     }
@@ -135,6 +139,7 @@ class AnggotaController extends BaseController
             $this->baseView . 'form',
             $this->getData([
                 'record' => $anggotum,
+                'kesinoman' => config('constants.kesinoman'),
             ])
         );
     }

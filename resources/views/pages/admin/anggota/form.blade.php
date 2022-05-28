@@ -195,6 +195,27 @@
                         <!-- Error -->
                     </div>
 
+                    <div class="form-group">
+                        <label for="">
+                            Kesinoman
+                        </label>
+                        <select
+                            name="kesinoman"
+                            class="form-control @error('kesinoman') is-invalid @enderror"
+                        >
+                            <option value="">- Pilih -</option>
+                            @foreach ($kesinoman as $data)
+                                <option value="{{ $data }}" @if ($record->userDetail) @if ($record->userDetail->kesinoman == $data) selected @endif @endif>{{ ucwords($data) }}</option>
+                            @endforeach
+                        </select>
+
+                        <!-- Error -->
+                        @error('kesinoman')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                        <!-- Error -->
+                    </div>
+
                     <div class="form-group text-right">
                         <button
                             type="submit"

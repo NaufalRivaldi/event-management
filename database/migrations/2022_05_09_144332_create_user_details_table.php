@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('age')->nullable();
             $table->string('hobby')->nullable();
+            $table->string('kesinoman')->nullable();
 
             $table->foreignId('user_id')
                 ->constrained('users')
