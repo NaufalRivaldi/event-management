@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomepageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,4 @@ use Illuminate\Support\Facades\Route;
  * Frontend Routes
  * --------------------------------------------------------------------------
  */
-Route::get('/', function () {
-        return to_route('admin.login');
-    })->name('homepage');
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');

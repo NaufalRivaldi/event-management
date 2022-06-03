@@ -51,6 +51,7 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Level</th>
+                                <th>Kesinoman</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@
                                     <td>{{ $record->name }}</td>
                                     <td>{{ $record->email }}</td>
                                     <td>{{ $record->level }}</td>
+                                    <td>{{ $record->userDetail ? ucwords($record->userDetail->kesinoman) : '-' }}</td>
                                     <td>
                                         <a
                                             href="{{ route('admin.anggota.edit', $record->id) }}"
