@@ -22,13 +22,13 @@ class UserDetail extends Model
 
     public function saveFromInputs(array $inputs): void
     {
-        $this->father_name = $inputs['father_name'];
-        $this->mother_name = $inputs['mother_name'];
-        $this->address = $inputs['address'];
-        $this->phone = $inputs['phone'];
-        $this->age = $inputs['age'];
-        $this->hobby = $inputs['hobby'];
-        $this->kesinoman = $inputs['kesinoman'];
+        $this->father_name = $inputs['father_name'] ?? null;
+        $this->mother_name = $inputs['mother_name'] ?? null;
+        $this->address = $inputs['address'] ?? null;
+        $this->phone = $inputs['phone'] ?? null;
+        $this->age = $inputs['age'] ?? null;
+        $this->hobby = $inputs['hobby'] ?? null;
+        $this->kesinoman = $inputs['kesinoman'] ?? null;
         $this->user_id = $inputs['user_id'];
         $this->save();
     }
