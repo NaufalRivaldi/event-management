@@ -54,7 +54,7 @@
                         Sejarah
                     </div>
                     <div class="subheadline mt-4">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla esse totam expedita vero aspernatur asperiores, dicta, sed vel quibusdam in natus quaerat. Maxime unde adipisci, enim quis sequi voluptas.
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis possimus repellat ullam facere iure labore facilis blanditiis culpa nemo ad eaque esse expedita, et eius nihil maxime aperiam consequuntur commodi?
                     </div>
                 </div>
             </div>
@@ -70,15 +70,17 @@
                     </div>
                     <div class="subheadline mt-4">
                         <b>Visi</b><br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla esse totam expedita vero aspernatur asperiores, dicta, sed vel quibusdam in natus quaerat. Maxime unde adipisci, enim quis sequi voluptas.
+                        Terwujudnya st. Segara madu yang mandiri, bertanggung jawab , dan memiki rasa menyama braya berlandaskan tri hita karana.
                     </div>
                     <div class="subheadline mt-4">
                         <b>Misi</b><br>
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla esse totam expedita vero aspernatur asperiores, dicta, sed vel quibusdam in natus quaerat. Maxime unde adipisci, enim quis sequi voluptas.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla esse totam expedita vero aspernatur asperiores, dicta, sed vel quibusdam in natus quaerat. Maxime unde adipisci, enim quis sequi voluptas.</li>
-                            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nulla esse totam expedita vero aspernatur asperiores, dicta, sed vel quibusdam in natus quaerat. Maxime unde adipisci, enim quis sequi voluptas.</li>
-                        </ul>
+                        <ol>
+                            <li>Menumbuhkan rasa memiliki / fanatik di dalan anggota sekaa teruna.</li>
+                            <li>Pengelolaan sekaa teruna yang bersih dan terpercaya.</li>
+                            <li>Meningkatkan seni dan budaya yang ada di lingkungan banjar adat medura.</li>
+                            <li>Meningkatkan olahraga untuk menumbuhkan rasa sportivitas.</li>
+                            <li>Meningkatkan rasa gotong royong di dalam anggota sekaa teruna</li>
+                        </ol>
                     </div>
                 </div>
             </div>
